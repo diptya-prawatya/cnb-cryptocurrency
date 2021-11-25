@@ -1,0 +1,3 @@
+export const GET_COIN_CHART = 'GET_COIN_CHART';
+export const GET_COIN_DETAILS = 'GET_COIN_DETAILS';
+export const GET_COINS_LIST = 'GET_COINS_LIST';
