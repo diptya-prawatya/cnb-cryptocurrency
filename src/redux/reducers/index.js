@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import { GET_COIN_CHART, GET_COIN_DETAILS, GET_COINS_LIST } from '../../constants';
+import { processMarketData } from '../../utils';
 
 const coinsList = (state = [], action) => {
   const { type, payload } = action;
@@ -18,7 +19,8 @@ const coinDetails = (state = {}, action) => {
 
   switch (type) {
     case GET_COIN_DETAILS:
-      return payload;
+      const processed_market_data = processMarketData(payload?.market_data);
+      return { ...payload, processed_market_data };
     default:
       return state;
   }
