@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_COIN_CHART, GET_COIN_DETAILS, GET_COINS_LIST } from '../../constants';
+import { ERROR, GET_COIN_CHART, GET_COIN_DETAILS, GET_COINS_LIST } from '../../constants';
 
 const axiosInstance = axios.create({
   timeout: 2 * 60 * 1000
@@ -20,6 +20,10 @@ export const fetchCoinsList = () => async (dispatch) => {
       });
     })
     .catch(function (err) {
+      dispatch({
+        type: ERROR,
+        payload: err
+      });
       console.error('fetchCoinsList error: ', err);
     });
 };
@@ -36,6 +40,10 @@ export const fetchCoinDetails = (coinId) => async (dispatch) => {
       });
     })
     .catch(function (err) {
+      dispatch({
+        type: ERROR,
+        payload: err
+      });
       console.error('fetchCoinDetails error: ', err);
     });
 };
@@ -52,6 +60,10 @@ export const fetchCoinMarketChart = (coinId) => async (dispatch) => {
       });
     })
     .catch(function (err) {
+      dispatch({
+        type: ERROR,
+        payload: err
+      });
       console.error('fetchCoinChart error: ', err);
     });
 };

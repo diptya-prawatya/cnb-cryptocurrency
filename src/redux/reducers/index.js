@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { GET_COIN_CHART, GET_COIN_DETAILS, GET_COINS_LIST } from '../../constants';
+import { ERROR, GET_COIN_CHART, GET_COIN_DETAILS, GET_COINS_LIST } from '../../constants';
 import { processMarketData } from '../../utils';
 
 const coinsList = (state = [], action) => {
@@ -37,10 +37,22 @@ const coinMarketChart = (state = {}, action) => {
   }
 };
 
+const serverError = (state = {}, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case ERROR:
+      return payload;
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   coinsList,
   coinDetails,
-  coinMarketChart
+  coinMarketChart,
+  serverError
 });
 
 export default rootReducer;

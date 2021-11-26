@@ -21,3 +21,26 @@ export const processMarketData = (marketData) => {
 
   return Object.values(data);
 };
+
+export const chartOptions = {
+  responsive: true,
+  scales: {
+    xAxes: [
+      {
+        gridLines: {
+          display: false
+        },
+        ticks: {
+          maxTicksLimit: 7
+        }
+      }
+    ],
+    yAxes: [
+      {
+        gridLines: {
+          display: false
+        }
+      }
+    ]
+  }
+};

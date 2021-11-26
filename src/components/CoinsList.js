@@ -34,13 +34,13 @@ const CoinsList = () => {
             value={selectedKeys[0]}
             onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
             onPressEnter={() => handleSearch(selectedKeys, confirm)}
-            style={{ width: 188, marginBottom: 8, display: 'block' }}
+            style={{ width: 120, marginBottom: 8, display: 'block' }}
           />
           <Button
             type="primary"
             onClick={() => handleSearch(selectedKeys, confirm)}
             size="small"
-            style={{ width: 90 }}>
+            style={{ width: 120 }}>
             Filter
           </Button>
         </div>
@@ -85,7 +85,6 @@ const CoinsList = () => {
       )
     }
   ];
-
   return (
     <Layout>
       <Content style={contentStyle}>

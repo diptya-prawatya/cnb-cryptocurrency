@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,32 +20,10 @@ import { Line } from 'react-chartjs-2';
 import { cardStyle, colStyle, contentStyle, tableStyle, titleStyle } from '../styles';
 import { fetchCoinDetails, fetchCoinMarketChart } from '../redux/actions';
 import { market_statistics, market_table, rank_score } from '../constants';
+import { chartOptions } from '../utils';
 
 const { Content } = Layout;
 const { Title, Paragraph } = Typography;
-
-const chartOptions = {
-  responsive: true,
-  scales: {
-    xAxes: [
-      {
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          maxTicksLimit: 7
-        }
-      }
-    ],
-    yAxes: [
-      {
-        gridLines: {
-          display: false
-        }
-      }
-    ]
-  }
-};
 
 const CoinDetails = () => {
   const coinId = useLocation().pathname;
@@ -56,9 +34,13 @@ const CoinDetails = () => {
     coinMarketChart: state.coinMarketChart
   }));
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    setLoading(true);
     dispatch(fetchCoinDetails(coinId));
     dispatch(fetchCoinMarketChart(coinId));
+    setLoading(false);
   }, [dispatch, coinId]);
 
   const { name, image, last_updated } = coinDetails;
@@ -147,7 +129,7 @@ const CoinDetails = () => {
           {rank_score.map((key, index) => (
             <Col key={index} xs={24} sm={24} md={12} lg={8} xl={8} style={colStyle}>
               <Card style={cardStyle}>
-                <Statistic precision={1} title={key} value={coinDetails[key]} />
+                {coinDetails && <Statistic precision={1} title={key} value={coinDetails[key]} />}
               </Card>
             </Col>
           ))}
@@ -155,8 +137,6 @@ const CoinDetails = () => {
       </>
     );
   };
-
-  const loading = Object.keys(coinDetails).length > 0 ? false : true;
 
   const MarketPrice = () => {
     return (
@@ -168,7 +148,7 @@ const CoinDetails = () => {
           {market_statistics.map((key, index) => (
             <Col key={index} xs={24} sm={24} md={12} lg={8} xl={8} style={colStyle}>
               <Card style={cardStyle}>
-                <Statistic precision={1} title={key} value={market_data[key]} />
+                {market_data && <Statistic precision={1} title={key} value={market_data[key]} />}
               </Card>
             </Col>
           ))}
