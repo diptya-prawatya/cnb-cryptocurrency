@@ -37,7 +37,6 @@ const CoinDetails = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
     dispatch(fetchCoinDetails(coinId));
     dispatch(fetchCoinMarketChart(coinId));
     setLoading(false);

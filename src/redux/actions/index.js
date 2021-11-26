@@ -2,16 +2,12 @@ import axios from 'axios';
 
 import { ERROR, GET_COIN_CHART, GET_COIN_DETAILS, GET_COINS_LIST } from '../../constants';
 
-const axiosInstance = axios.create({
-  timeout: 2 * 60 * 1000
-});
-
 const baseURL = 'https://api.coingecko.com/api/v3';
 
 export const fetchCoinsList = () => async (dispatch) => {
   const url = `${baseURL}/coins/list`;
 
-  await axiosInstance
+  await axios
     .get(url)
     .then(function (res) {
       dispatch({
@@ -31,7 +27,7 @@ export const fetchCoinsList = () => async (dispatch) => {
 export const fetchCoinDetails = (coinId) => async (dispatch) => {
   const url = `${baseURL}/coins${coinId}`;
 
-  await axiosInstance
+  await axios
     .get(url)
     .then(function (res) {
       dispatch({
@@ -51,7 +47,7 @@ export const fetchCoinDetails = (coinId) => async (dispatch) => {
 export const fetchCoinMarketChart = (coinId) => async (dispatch) => {
   const url = `${baseURL}/coins/${coinId}/market_chart?vs_currency=usd&days=7`;
 
-  await axiosInstance
+  await axios
     .get(url)
     .then(function (res) {
       dispatch({
